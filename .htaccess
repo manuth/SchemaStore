@@ -1,0 +1,14 @@
+Header set Access-Control-Allow-Origin "*"
+
+RewriteEngine On
+    RewriteCond %{QUERY_STRING} ^.*Page=([^&]*)$  [OR]
+    RewriteCond %{REQUEST_FILENAME} -f  [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+        RewriteRule ^ -  [L]
+    
+    RewriteCond %{REQUEST_URI} ^(.*)/$
+        RewriteRule ^ %1  [L]
+    RewriteRule ^(.*)$ -  [E=File:SchemaStore/$1.json]
+    RewriteCond %{ENV:File} -F
+        RewriteRule ^ index.php?File=%{ENV:File}  [L]
+    RewriteRule ^ -  [R=404]
