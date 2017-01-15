@@ -1,0 +1,225 @@
+{
+    "id": "http://json.nuth.ch/TemPHPlate/menubar",
+    "$schema": "http://json-schema.org/draft-04/schema#",
+
+    "description": "Schema for a menubar designed for TemPHPlate",
+
+    "type": "object",
+    "properties":
+    {
+        "menuBar":
+        {
+            "title": "MenuBar",
+            "description": "Provides information about the menu-bar",
+            "type": "object",
+
+            "properties":
+            {
+                "style":
+                {
+                    "title": "Style",
+                    "description": "The style of the menu-bar",
+                    "type": "string",
+
+                    "enum": [
+                        "default",
+                        "inverse"
+                    ],
+                    "default": "default"
+                },
+                "menuItems":
+                {
+                    "title": "MenuItems",
+                    "description": "The menu-items of the menu-bar",
+                    "type": "array",
+
+                    "items":
+                    {
+                        "oneOf":
+                        [
+                            { "$ref": "#/definitions/menuObject" }
+                        ]
+                    }
+                }
+            },
+            "required": [ "style", "menuItems" ],
+            "additionalProperties": false
+        }
+    },
+    "required": [ "menuBar" ],
+
+    "definitions":
+    {
+        "menuObject":
+        {
+            "type": "object",
+            "properties":
+            {
+                "type":
+                {
+                    "title": "Type",
+                    "description": "The type of the menu-object",
+                    "type": "string",
+                    
+                    "enum": [ "menuItem", "menuItemGroup", "text" ],
+                    "default": "menuItem"
+                }
+            },
+            "required": [ "type" ],
+
+            "oneOf":
+            [
+                { "$ref": "#/definitions/menuItem" },
+                { "$ref": "#/definitions/menuItemGroup" },
+                { "$ref": "#/definitions/menuText" }
+            ]
+        },
+        "subMenuObject":
+        {
+            "type": "object",
+            "properties":
+            {
+                "type":
+                {
+                    "title": "Type",
+                    "description": "The type of the menu-object",
+                    "type": "string",
+                    
+                    "enum": [ "menuItem", "separator", "text" ],
+                    "default": "menuItem"
+                }
+            },
+            "required": [ "type" ],
+
+            "oneOf":
+            [
+                { "$ref": "#/definitions/menuItem" },
+                { "$ref": "#/definitions/separator" },
+                { "$ref": "#/definitions/menuText" }
+            ]
+        },
+        "menuItem":
+        {
+            "title": "MenuItem",
+            "description": "Represents a menu-item",
+            "type": "object",
+
+            "properties":
+            {
+                "type":
+                {
+                    "type": "string",
+                    "enum": [ "menuItem" ]
+                },
+                "name":
+                {
+                    "title": "Name",
+                    "description": "The name of the menu-item to display",
+                    "type": "string",
+
+                    "default": "Name"
+                },
+                "url":
+                {
+                    "title": "URL",
+                    "description": "The URI to open",
+                    "type": "string",
+
+                    "default": "http://wwww.example.com/"
+                },
+                "newTab":
+                {
+                    "title": "NewTab",
+                    "description": "Defines whether the URI should be opened up in a new tab or not",
+                    "type": "boolean",
+
+                    "default": false
+                }
+            },
+            "required": [
+                "name",
+                "url"
+            ],
+            "additionalProperties": false
+        },
+        "separator":
+        {
+            "title": "Separator",
+            "description": "Represents a menu-separator",
+            "type": "object",
+
+            "properties":
+            {
+                "type":
+                {
+                    "type": "string",
+                    "enum": [ "separator" ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "menuItemGroup":
+        {
+            "title": "MenuItemGroup",
+            "description": "Represents a group of menu-items",
+            "type": "object",
+
+            "properties":
+            {
+                "type":
+                {
+                    "type": "string",
+                    "enum": [ "menuItemGroup" ]
+                },
+                "name":
+                {
+                    "title": "Name",
+                    "description": "The name of the menu-item-group to display",
+                    "type": "string"
+                },
+                "menuItems":
+                {
+                    "title": "MenuItems",
+                    "description": "The menu-items of the group",
+                    "type": "array",
+
+                    "items":
+                    {
+                        "oneOf":
+                        [
+                            { "$ref": "#/definitions/subMenuObject" }
+                        ]
+                    }
+                }
+            },
+            "required":[
+                "menuItems",
+                "name"
+            ]
+        },
+        "menuText":
+        {
+            "title": "MenuText",
+            "description": "Represents text",
+            "type": "object",
+
+            "properties":
+            {
+                "type":
+                {
+                    "type": "string",
+                    "enum": [ "text" ]
+                },
+                "text":
+                {
+                    "title": "Text",
+                    "description": "The text to display",
+                    "type": "string"
+                }
+            },
+            "required":[
+                "text"
+            ]
+        }
+    }
+}
