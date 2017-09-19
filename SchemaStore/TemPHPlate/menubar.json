@@ -189,6 +189,15 @@
                 },
                 "Name": {
                     "default": "menuBar"
+                },
+                "Style": {
+                    "title": "Style",
+                    "type": "string",
+                    "description": "The style of the menu-bar",
+                    "enum": [
+                        "default",
+                        "dark"
+                    ]
                 }
             }
         }
