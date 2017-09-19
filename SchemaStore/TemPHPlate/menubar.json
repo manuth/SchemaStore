@@ -80,7 +80,11 @@
                         ]
                     }
                 }
-            }
+            },
+            "additionalProperties": false,
+            "required": [
+                "Items"
+            ]
         },
         "MenuItem": {
             "title": "MenuItem",
@@ -100,7 +104,8 @@
                 "Name": {
                     "default": "menuItem"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "LinkedMenuItem": {
             "title": "LinkedMenuItem",
@@ -130,7 +135,11 @@
                     "type": "boolean",
                     "description": "A value indicating whether to load the page in a new browser-instance."
                 }
-            }
+            },
+            "additionalProperties": false,
+            "required": [
+                "URL"
+            ]
         },
         "MenuItemSeparator": {
             "title": "MenuItemSeparator",
@@ -150,7 +159,8 @@
                 "Name": {
                     "default": "menuItemSeparator"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "MenuItemGroup": {
             "title": "MenuItemGroup",
@@ -170,7 +180,8 @@
                 "Name": {
                     "default": "menuItemGroup"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "MenuBar": {
             "title": "MenuBar",
@@ -220,7 +231,8 @@
                         ]
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         }
     }
 }
