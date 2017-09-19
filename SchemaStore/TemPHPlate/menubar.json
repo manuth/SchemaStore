@@ -81,7 +81,6 @@
                     }
                 }
             },
-            "additionalProperties": false,
             "required": [
                 "Items"
             ]
@@ -103,7 +102,10 @@
                 },
                 "Name": {
                     "default": "menuItem"
-                }
+                },
+                "Text": {},
+                "Enabled": {},
+                "Visible": {}
             },
             "additionalProperties": false
         },
@@ -125,6 +127,9 @@
                 "Name": {
                     "default": "linkedMenuItem"
                 },
+                "Text": {},
+                "Enabled": {},
+                "Visible": {},
                 "URL": {
                     "title": "URL",
                     "type": "string",
@@ -179,7 +184,11 @@
                 },
                 "Name": {
                     "default": "menuItemGroup"
-                }
+                },
+                "Text": {},
+                "Enabled": {},
+                "Visible": {},
+                "Items": {}
             },
             "additionalProperties": false
         },
@@ -201,6 +210,10 @@
                 "Name": {
                     "default": "menuBar"
                 },
+                "Text": {},
+                "Enabled": {},
+                "Visible": {},
+                "Items": {},
                 "Style": {
                     "title": "Style",
                     "type": "string",
