@@ -163,7 +163,10 @@
                 },
                 "Name": {
                     "default": "menuItemSeparator"
-                }
+                },
+                "Text": {},
+                "Enabled": {},
+                "Visible": {}
             },
             "additionalProperties": false
         },
