@@ -198,6 +198,27 @@
                         "default",
                         "dark"
                     ]
+                },
+                "RightItems": {
+                    "title": "Items",
+                    "type": "array",
+                    "description": "The items of the menu-item-group.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/MenuItem"
+                            },
+                            {
+                                "$ref": "#/definitions/LinkedMenuItem"
+                            },
+                            {
+                                "$ref": "#/definitions/MenuItemSeparator"
+                            },
+                            {
+                                "$ref": "#/definitions/MenuItemGroup"
+                            }
+                        ]
+                    }
                 }
             }
         }
