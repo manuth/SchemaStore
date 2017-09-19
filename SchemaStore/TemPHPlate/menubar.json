@@ -1,262 +1,196 @@
 {
     "id": "http://json.nuth.ch/TemPHPlate/menubar",
-    "$schema": "http://json-schema.org/draft-04/schema#",
-
+    "$schema": "http://json-schema.org/draft-06/schema#",
     "title": "TemPHPlate • MenuBar",
     "description": "Schema for a menu-bar designed for TemPHPlate",
-
-    "type": "object",
-    "properties":
-    {
-        "menuBar":
+    "allOf": [
         {
-            "type": "object",
-            "title": "MenuBar",
-            "description": "Provides information about the menu-bar",
-
-            "properties":
-            {
-                "style":
-                {
-                    "type": "string",
-                    "title": "Style",
-                    "description": "The visual style of the menu-bar",
-
-                    "enum": [
-                        "default",
-                        "inverse"
-                    ],
-                    "default": "default"
-                },
-                "items":
-                {
-                    "type": "array",
-                    "title": "Items",
-                    "description": "The items of the menu-bar",
-
-                    "items":
-                    {
-                        "oneOf":
-                        [
-                            { "$ref": "#/definitions/mainMenuItem" }
-                        ]
-                    }
-                },
-                "rightItems":
-                {
-                    "type": "array",
-                    "title": "RightItems",
-                    "description": "The items of the menubar which are desplayed on the right",
-
-                    "items":
-                    {
-                        "oneOf":
-                        [
-                            { "$ref": "#/definitions/mainMenuItem" }
-                        ]
-                    }
-                }
-            },
-            "required":
-            [
-                "style",
-                "items",
-                "rightItems"
-            ],
-            "additionalProperties": false
+            "$ref": "#/definitions/MenuBar"
         }
-    },
-    "definitions":
-    {
-        "menuItemBase":
-        {
+    ],
+    "definitions": {
+        "Control": {
+            "title": "Control",
             "type": "object",
-
-            "properties":
-            {
-                "id":
-                {
-                    "type": "string",
-                    "title": "ID",
-                    "description": "The unique identifier of the menu-item"
-                },
-                "type":
-                {
-                    "type": "string",
+            "description": "Represents a control.",
+            "properties": {
+                "Type": {
                     "title": "Type",
-                    "description": "The type of the menu-item",
-
-                    "default": "menuItem"
-                }
-            },
-            "required": [ "id", "type" ]
-        },
-
-        "mainMenuItem":
-        {
-            "allOf":
-            [
-                { "$ref": "#/definitions/menuItemBase" }
-            ],
-            
-            "oneOf":
-            [
-                { "$ref": "#/definitions/menuItem" },
-                { "$ref": "#/definitions/menuItemText" },
-                { "$ref": "#/definitions/menuItemGroup" }
-            ]
-        },
-
-        "subMenuItem":
-        {
-            "allOf":
-            [
-                { "$ref": "#/definitions/menuItemBase" }
-            ],
-
-            "oneOf":
-            [
-                { "$ref": "#/definitions/menuItem" },
-                { "$ref": "#/definitions/menuItemText" },
-                { "$ref": "#/definitions/menuItemSeparator" }
-            ]
-        },
-        
-        "menuItem":
-        {
-            "title": "MenuItem",
-            "description": "Represents a menu-item",
-
-            "properties":
-            {
-                "id": { },
-                "type":
-                {
-                    "enum": [ "menuItem" ],
-                    "default": "menuItem"
-                },
-                "name":
-                {
                     "type": "string",
+                    "description": "The type of the control.",
+                    "default": "Control"
+                },
+                "Name": {
                     "title": "Name",
-                    "description": "The name of the menu-item to display",
-
-                    "default": "Example"
-                },
-                "url":
-                {
                     "type": "string",
-                    "title": "URL",
-                    "description": "The URI to open",
-
-                    "default": "http://www.example.com/"
+                    "description": "The identifier of the control.",
+                    "default": "control"
                 },
-                "newTab":
-                {
-                    "type": "boolean",
-                    "title": "NewTab",
-                    "description": "Defines whether the URI should be opened up in a new tab or not",
-
-                    "default": false
-                }
-            },
-            "required":
-            [
-                "name",
-                "url"
-            ],
-            "additionalProperties": false
-        },
-
-        "menuItemText":
-        {
-            "title": "MenuItemText",
-            "description": "Provides a menu-item which displays a text",
-
-            "properties":
-            {
-                "id": { },
-                "type":
-                {
-                    "enum":
-                    [
-                        "menuItemText"
-                    ]
-                },
-                "text":
-                {
-                    "type": "string",
+                "Text": {
                     "title": "Text",
-                    "description": "The text to display",
-
-                    "default": "Example"
-                }
-            },
-            "required":
-            [
-                "text"
-            ],
-            "additionalProperties": false
-        },
-
-        "menuItemSeparator":
-        {
-            "title": "MenuItemSeparator",
-            "description": "Provides a menu-separator",
-
-            "properties":
-            {
-                "id": { },
-                "type":
-                {
-                    "enum":
-                    [
-                        "menuItemSeparator"
-                    ]
-                }
-            },
-            "additionalProperties": false
-        },
-        
-        "menuItemGroup":
-        {
-            "title": "MenuItemGroup",
-            "description": "Provides a group of menu-items",
-
-            "properties":
-            {
-                "id": { },
-                "type":
-                {
-                    "enum": [ "menuItemGroup" ]
-                },
-                "name":
-                {
                     "type": "string",
-                    "title": "Name",
-                    "description": "The name of the group to display"
+                    "description": "The text of the control.",
+                    "default": ""
                 },
-                "items":
+                "Enabled": {
+                    "title": "Enabled",
+                    "type": "boolean",
+                    "description": "A value indicating whether the the control can respond to user interaction.",
+                    "default": true
+                },
+                "Visible": {
+                    "title": "Visible",
+                    "type": "boolean",
+                    "description": "A value indicating whether the control and all its child controls are displayed.",
+                    "default": true
+                }
+            },
+            "required": [
+                "Type",
+                "Name",
+                "Text"
+            ]
+        },
+        "MenuItemGroupBase": {
+            "title": "MenuItemGroupBase",
+            "allOf": [
                 {
-                    "type": "array",
+                    "$ref": "#/definitions/Control"
+                }
+            ],
+            "properties": {
+                "Items": {
                     "title": "Items",
-                    "description": "The menu-items of the group",
-
-                    "items":
-                    {
-                        "allOf":
-                        [
-                            { "$ref": "#/definitions/subMenuItem" }
+                    "type": "array",
+                    "description": "The items of the menu-item-group.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/MenuItem"
+                            },
+                            {
+                                "$ref": "#/definitions/LinkedMenuItem"
+                            },
+                            {
+                                "$ref": "#/definitions/MenuItemSeparator"
+                            },
+                            {
+                                "$ref": "#/definitions/MenuItemGroup"
+                            }
                         ]
                     }
                 }
-            },
-            "required":
-            [
-                "name",
-                "items"
+            }
+        },
+        "MenuItem": {
+            "title": "MenuItem",
+            "description": "Represents a menu-item.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Control"
+                }
             ],
-            "additionalProperties": false
+            "properties": {
+                "Type": {
+                    "enum": [
+                        "MenuItem"
+                    ],
+                    "default": "MenuItem"
+                },
+                "Name": {
+                    "default": "menuItem"
+                }
+            }
+        },
+        "LinkedMenuItem": {
+            "title": "LinkedMenuItem",
+            "description": "Represents a linkex menu-item.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Control"
+                }
+            ],
+            "properties": {
+                "Type": {
+                    "enum": [
+                        "LinkedMenuItem"
+                    ],
+                    "default": "LinkedMenuItem"
+                },
+                "Name": {
+                    "default": "linkedMenuItem"
+                },
+                "URL": {
+                    "title": "URL",
+                    "type": "string",
+                    "description": "The `URI` to the page to load."
+                },
+                "NewTab": {
+                    "title": "NewTab",
+                    "type": "boolean",
+                    "description": "A value indicating whether to load the page in a new browser-instance."
+                }
+            }
+        },
+        "MenuItemSeparator": {
+            "title": "MenuItemSeparator",
+            "description": "Represents a separator of a menu-bar.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Control"
+                }
+            ],
+            "properties": {
+                "Type": {
+                    "enum": [
+                        "MenuItemSeparator"
+                    ],
+                    "default": "MenuItemSeparator"
+                },
+                "Name": {
+                    "default": "menuItemSeparator"
+                }
+            }
+        },
+        "MenuItemGroup": {
+            "title": "MenuItemGroup",
+            "description": "Represents a menu-item that contains a set of menu-items.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MenuItemGroupBase"
+                }
+            ],
+            "properties": {
+                "Type": {
+                    "enum": [
+                        "MenuItemGroup"
+                    ],
+                    "default": "MenuItemGroup"
+                },
+                "Name": {
+                    "default": "menuItemGroup"
+                }
+            }
+        },
+        "MenuBar": {
+            "title": "MenuBar",
+            "description": "Represents a menu-bar.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/MenuItemGroupBase"
+                }
+            ],
+            "properties": {
+                "Type": {
+                    "enum": [
+                        "MenuBar"
+                    ],
+                    "default": "MenuBar"
+                },
+                "Name": {
+                    "default": "menuBar"
+                }
+            }
         }
     }
 }
